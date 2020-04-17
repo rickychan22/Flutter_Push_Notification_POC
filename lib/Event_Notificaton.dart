@@ -4,7 +4,7 @@ import 'package:push_notification_poc/services/database.dart';
 
 
 void createRecord() async {
-
+  await DatabaseService().notificationCollection;
 }
 
 class Event_Notification extends StatefulWidget {
