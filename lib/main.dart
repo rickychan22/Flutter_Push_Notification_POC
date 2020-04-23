@@ -35,39 +35,52 @@ class _Push_NotificationState extends State<Push_Notification> {
 
   int sharedValue=0;
 
-  final Map<int, Widget> tabs = const<int, Widget>{
-    0: Text('Notifications'),
-    1: Text('Draft'),
+  // if map is changed it is necessary to perform hot restart to view changes
+  final Map<int, Widget> tabs = <int, Widget>{
+    0: Text(
+        'Notifications',
+        style: TextStyle(
+          fontSize: 19.0,
+          fontWeight: FontWeight.bold
+        ),
+      ),
+    1: Container(
+      margin: const EdgeInsets.symmetric(vertical: 14.0),
+      child: Text(
+        'Draft',
+        style: TextStyle(
+            fontSize: 19.0,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+    )
   };
 
-  Widget giveCenter(String lala){
-    return Center(
-      child: Text(lala),
-    );
-  }
-
-  FlatButton ButtonMaker (String message, String RouteName) {
-   return FlatButton(
-     color: Colors.white,
-     child: Row(
-       children: <Widget>[
-         Icon(Icons.ac_unit),
-         Padding(
-           padding: const EdgeInsets.all(8.0),
-           child: Text(
-             message,
-             style: TextStyle(
-               color: Color.fromRGBO(37, 8, 86, 1),
-               fontSize: 16.0
+  Padding ButtonMaker (String message, String RouteName) {
+   return Padding(
+     padding: const EdgeInsets.all(8.0),
+     child: FlatButton(
+       color: Colors.white,
+       child: Row(
+         children: <Widget>[
+           Icon(Icons.ac_unit),
+           Padding(
+             padding: const EdgeInsets.all(8.0),
+             child: Text(
+               message,
+               style: TextStyle(
+                 color: Color.fromRGBO(37, 8, 86, 1),
+                 fontSize: 16.0
+               ),
              ),
            ),
-         ),
-       ],
+         ],
+       ),
+       onPressed: (){
+         print("button was clicked");
+         Navigator.pushNamed(this.context, RouteName);
+       },
      ),
-     onPressed: (){
-       print("button was clicked");
-       Navigator.pushNamed(this.context, RouteName);
-     },
    );
   }
 
@@ -88,9 +101,11 @@ class _Push_NotificationState extends State<Push_Notification> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            ButtonMaker("EVENT NOTIFICATION", "/first"),
-            ButtonMaker("EMERGENCY NOTIFICATION", "/first"),
-            ButtonMaker("LIFE OR DEATH NOTIFCATION", "/first")
+            ButtonMaker("Performance Update", "/first"),
+            ButtonMaker("Event Reminder", "/first"),
+            ButtonMaker("Facility", "/first"),
+            ButtonMaker("Emergency", "/first"),
+            ButtonMaker("Create Your Own", "/first")
           ],
         ),
       ],
@@ -124,7 +139,7 @@ class _Push_NotificationState extends State<Push_Notification> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
               child: CupertinoSegmentedControl<int>(
                 children: tabs,
                 onValueChanged: (int val){
