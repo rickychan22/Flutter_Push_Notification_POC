@@ -40,7 +40,11 @@ class _Push_NotificationState extends State<Push_Notification> {
     1: Text('Draft'),
   };
 
-  final Map<int, Widget> pages = const<int, Widget>{};
+  Widget giveCenter(String lala){
+    return Center(
+      child: Text(lala),
+    );
+  }
 
   FlatButton ButtonMaker (String message, String RouteName) {
    return FlatButton(
@@ -64,7 +68,7 @@ class _Push_NotificationState extends State<Push_Notification> {
        print("button was clicked");
        Navigator.pushNamed(this.context, RouteName);
      },
-   ); 
+   );
   }
 
   Column buildBody(){
@@ -86,13 +90,21 @@ class _Push_NotificationState extends State<Push_Notification> {
           children: <Widget>[
             ButtonMaker("EVENT NOTIFICATION", "/first"),
             ButtonMaker("EMERGENCY NOTIFICATION", "/first"),
-            ButtonMaker("LIFE OR DEATH NOTIFCATION", "first")
+            ButtonMaker("LIFE OR DEATH NOTIFCATION", "/first")
           ],
         ),
       ],
     );
   }
 
+  Widget whichBody(){
+    if(sharedValue == 0){
+      return buildBody();
+    }
+    else{
+      return Text("nope");
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -123,7 +135,9 @@ class _Push_NotificationState extends State<Push_Notification> {
                 groupValue: sharedValue,
               ),
             ),
-            buildBody(),
+            whichBody(),
+            //buildBody(),
+            //bodies[sharedValue],
           ],
         )
       ),
