@@ -112,6 +112,7 @@ class _Push_NotificationState extends State<Push_Notification> {
     );
   }
 
+  //conditional to control the body shown based on the tab that is clicked on
   Widget whichBody(){
     if(sharedValue == 0){
       return buildBody();
@@ -120,6 +121,7 @@ class _Push_NotificationState extends State<Push_Notification> {
       return Text("nope");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
